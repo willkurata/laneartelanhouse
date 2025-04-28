@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout - Área do ADM</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0f0f0f;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .message-container {
+      background-color: #1a1a1a;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 204, 102, 0.5);
+      animation: fadeIn 1s ease forwards;
+    }
+
+    h1 {
+      color: #00cc66;
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="message-container">
+    <h1>Logout Realizado!</h1>
+    <p>Você saiu com sucesso da Área do ADM.</p>
+    <p>Redirecionando para o login em 3 segundos...</p>
+  </div>
+
+  <script>
+    setTimeout(function() {
+      window.location.href = 'adminlogin.html';
+    }, 3000); // 3 segundos
+  </script>
+
+</body>
+</html>

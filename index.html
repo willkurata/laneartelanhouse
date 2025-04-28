@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lan & Arte - Lan House</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    header {
+      background-color: #1a1a1a;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .logo {
+      align-content: center;
+      transform: translateX(-50%);
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .logo img {
+      height: 60px;
+    }
+
+    .header-button {
+      background: none;
+      border: 1px solid #00cc66;
+      padding: 5px 10px;
+      color: #00cc66;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: transform 0.3s, background 0.3s, color 0.3s;
+    }
+
+    .header-button:hover {
+      transform: scale(1.05);
+      background-color: #00cc66;
+      color: #0f0f0f;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px 20px;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .main-button {
+      width: 250px;
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #00cc66, #3399ff);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .main-button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #3399ff, #00cc66);
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      padding: 10px;
+      text-align: center;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .footer-button {
+      background: none;
+      border: 1px solid #3399ff;
+      padding: 5px 15px;
+      color: #3399ff;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: transform 0.3s, background 0.3s, color 0.3s;
+    }
+
+    .footer-button:hover {
+      transform: scale(1.05);
+      background-color: #3399ff;
+      color: #0f0f0f;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button class="header-button" onclick="window.location.href='index.html'">Home</button>
+    <div class="logo">
+      <img src="img/Cartão Visita LAN nome branco p usa fundo preto.png" alt="Logo Lan & Arte">
+    </div>
+    <a href="clientarea.html" class="header-button">Área do Cliente</a>
+  </header>
+
+  <main>
+    <button class="main-button" onclick="window.open('https://instagram.com/laneartelanhouse', '_blank')">Instagram</button>
+    <button class="main-button" onclick="window.open('https://wa.me/5512996756792?text=Ol%C3%A1%21%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20seus%20servi%C3%A7os%20de%20lan%20house%20e%20manuten%C3%A7%C3%A3o%20de%20computadores.', '_blank')">Contato</button>
+    <button class="main-button" onclick="window.open('https://www.google.com/maps/place/LAN+%26+ARTE+LAN+HOUSE+-+UBATUBA/@-23.4328138,-45.0736659,17z/data=!3m1!4b1!4m6!3m5!1s0x94cd5226b43f79c7:0x778f4a3be7d14702!8m2!3d-23.4328138!4d-45.071091!16s%2Fg%2F11rhz3qt7d?entry=ttu', '_blank')">Localização</button>
+    <button class="main-button" onclick="window.location.href='clientarea.html'">Área do Cliente</button>
+  </main>
+
+  <footer>
+    <a href="admin.html" class="footer-button">Área do ADM</a>
+  </footer>
+
+</body>
+</html>

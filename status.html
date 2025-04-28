@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Status do Cliente</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 204, 102, 0.5);
+      max-width: 500px;
+      width: 100%;
+      margin-top: 30px;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    h1, h2 {
+      color: #00cc66;
+      text-align: center;
+    }
+
+    p, a {
+      margin: 10px 0;
+      word-wrap: break-word;
+    }
+
+    img {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+
+    button {
+      margin-top: 20px;
+      background: linear-gradient(90deg, #00cc66, #3399ff);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #3399ff, #00cc66);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Status do Computador</h1>
+    <div id="userData">
+      <!-- Dados serão carregados aqui -->
+    </div>
+    <button onclick="logout()">Sair</button>
+  </div>
+
+  <script>
+    function loadUserData() {
+      const user = JSON.parse(localStorage.getItem('loggedUser'));
+
+      if (!user) {
+        window.location.href = 'clientarea.html'; // Se não tiver login, volta para o login
+        return;
+      }
+
+      const userData = document.getElementById('userData');
+
+      userData.innerHTML = `
+        <h2>Olá, ${user.username}</h2>
+        <p><strong>Status:</strong> ${user.status}</p>
+        <p><strong>Orçamento:</strong> R$ ${user.budget}</p>
+        ${user.link ? `<p><strong>Link:</strong> <a href="${user.link}" target="_blank">Clique aqui</a></p>` : ''}
+        ${user.image ? `<p><strong>Imagem:</strong><br><img src="${user.image}" alt="Imagem do Orçamento"></p>` : ''}
+        <p><strong>Comentário:</strong> ${user.comment}</p>
+      `;
+    }
+
+    function logout() {
+      localStorage.removeItem('loggedUser');
+      window.location.href = 'clientarea.html';
+    }
+
+    loadUserData();
+  </script>
+
+</body>
+</html>

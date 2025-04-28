@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Área do Cliente</title>
+  <style>
+    /* Seu CSS continua igual */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .login-container {
+      background-color: #1a1a1a;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 204, 102, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 300px;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"], input[type="password"] {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: white;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px;
+      background: linear-gradient(90deg, #00cc66, #3399ff);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #3399ff, #00cc66);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Área do Cliente</h2>
+    <input type="text" id="username" placeholder="Usuário">
+    <input type="password" id="password" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <p id="error" style="color:red; text-align:center;"></p>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const error = document.getElementById('error');
+
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+
+      const user = users.find(u => u.username === username && u.password === password);
+
+      if (user) {
+        localStorage.setItem('loggedUser', JSON.stringify(user)); // Salva o usuário logado
+        window.location.href = 'status.html'; // Redireciona
+      } else {
+        error.textContent = "Usuário ou senha inválidos!";
+      }
+    }
+  </script>
+
+</body>
+</html>

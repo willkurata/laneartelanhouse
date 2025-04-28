@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área do Administrador</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      color: #00cc66;
+    }
+    form {
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background-color: #00cc66;
+      color: #0f0f0f;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3399ff;
+    }
+    .user-list {
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Área do Administrador</h1>
+
+  <form id="userForm">
+    <h2>Cadastrar Cliente</h2>
+    <input type="text" id="username" placeholder="Usuário" required>
+    <input type="password" id="password" placeholder="Senha" required>
+    <select id="status">
+      <option value="Em Manutenção">Em Manutenção</option>
+      <option value="Aguardando Peça">Aguardando Peça</option>
+      <option value="Pronto para Retirar">Pronto para Retirar</option>
+    </select>
+    <textarea id="budget" placeholder="Orçamento (R$)" rows="2"></textarea>
+    <input type="url" id="link" placeholder="Link Externo (opcional)">
+    <input type="file" id="image" accept="image/*">
+    <textarea id="comment" placeholder="Comentários" rows="4"></textarea>
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <div class="user-list" id="userList">
+    <h2>Lista de Clientes</h2>
+    <!-- Lista dos clientes aparece aqui -->
+  </div>
+
+  <script>
+    const form = document.getElementById('userForm');
+    const userList = document.getElementById('userList');
+
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+    function renderUsers() {
+      userList.innerHTML = '<h2>Lista de Clientes</h2>';
+      users.forEach((user, index) => {
+        const div = document.createElement('div');
+        div.style.borderBottom = '1px solid #333';
+        div.style.padding = '10px 0';
+        div.innerHTML = `
+          <strong>Usuário:</strong> ${user.username}<br>
+          <strong>Status:</strong> ${user.status}<br>
+          <strong>Orçamento:</strong> ${user.budget}<br>
+          <strong>Link:</strong> ${user.link ? `<a href="${user.link}" target="_blank">Abrir</a>` : 'Nenhum'}<br>
+          <strong>Comentário:</strong> ${user.comment}<br>
+          <button onclick="editUser(${index})">Editar</button>
+          <button onclick="deleteUser(${index})">Excluir</button>
+        `;
+        userList.appendChild(div);
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const newUser = {
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value,
+        status: document.getElementById('status').value,
+        budget: document.getElementById('budget').value,
+        link: document.getElementById('link').value,
+        comment: document.getElementById('comment').value,
+        image: document.getElementById('image').value // Aqui não estou salvando imagem, mas posso ajudar nisso também se quiser
+      };
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
+      renderUsers();
+      form.reset();
+    });
+
+    function deleteUser(index) {
+      users.splice(index, 1);
+      localStorage.setItem('users', JSON.stringify(users));
+      renderUsers();
+    }
+
+    function editUser(index) {
+      const user = users[index];
+      document.getElementById('username').value = user.username;
+      document.getElementById('password').value = user.password;
+      document.getElementById('status').value = user.status;
+      document.getElementById('budget').value = user.budget;
+      document.getElementById('link').value = user.link;
+      document.getElementById('comment').value = user.comment;
+      deleteUser(index);
+    }
+
+    renderUsers();
+  </script>
+
+</body>
+</html>

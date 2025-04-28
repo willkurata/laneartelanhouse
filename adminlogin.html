@@ -80,8 +80,8 @@
       const password = document.getElementById('password').value.trim();
       const error = document.getElementById('error');
 
-      if (username === "prankmaster" && password === "conter00") {
-        localStorage.setItem('adminLogged', 'true'); // Marca que o admin está logado
+      if (localStorage.getItem('adminLogged') !== 'true') {
+        window.location.href = 'adminlogin.html'; // Marca que o admin está logado
         window.location.href = 'admin.html';
       } else {
         error.textContent = "Usuário ou senha incorretos!";
